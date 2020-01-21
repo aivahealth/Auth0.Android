@@ -5,12 +5,14 @@ import android.support.annotation.VisibleForTesting;
 
 import com.auth0.android.authentication.AuthenticationAPIClient;
 import com.auth0.android.authentication.AuthenticationException;
+import com.auth0.android.request.ParameterizableRequest;
 import com.auth0.android.callback.AuthenticationCallback;
 import com.auth0.android.callback.BaseCallback;
 import com.auth0.android.jwt.JWT;
 import com.auth0.android.result.Credentials;
 
 import java.util.Date;
+import java.util.Map;
 
 import static android.text.TextUtils.isEmpty;
 
@@ -85,7 +87,7 @@ public class CredentialsManager {
      *
      * @param callback the callback that will receive a valid {@link Credentials} or the {@link CredentialsManagerException}.
      */
-    public void getCredentials(Map<String, Object> additionalParameters, @NonNull final BaseCallback<Credentials, CredentialsManagerException> callback) {
+    public void getCredentials(final Map<String, Object> additionalParameters, @NonNull final BaseCallback<Credentials, CredentialsManagerException> callback) {
         String accessToken = storage.retrieveString(KEY_ACCESS_TOKEN);
         final String refreshToken = storage.retrieveString(KEY_REFRESH_TOKEN);
         String idToken = storage.retrieveString(KEY_ID_TOKEN);
